@@ -14,9 +14,22 @@
     </div>
     <div>
         <!-- FORMULARIO -->
+        <!-- 
+            Usar VSCode para leer el detalle de cada uno de los atributos que aparecen en este HTML.
+            Solamente ubicarse con el cursor encima de la etiqueta que deseen conocer más y esperar unos
+            segundos, luego de eso aparecerá una ayuda de cada uno de las
+        -->
         <form id="formulario">
             <label for="A">A: </label>
             <input id="A" type="number" placeholder="Introduzca A">
+            <br>
+            <label for="O">Operación:</label>
+            <select id="O">
+                <option value="S">Suma</option>
+                <option value="R">Resta</option>
+                <option value="M">Multiplicación</option>
+                <option value="D">División</option>
+            </select>
             <br>
             <label for="B">B: </label>
             <input id="B" type="number" placeholder="Introduzca B">
@@ -29,7 +42,7 @@
         <table>
             <thead>
                 <th>A</th>
-                <th>+</th>
+                <th>(+, -, *, /)</th>
                 <th>B</th>
                 <th>=</th>
                 <th>Resultado</th>
@@ -56,46 +69,60 @@
                     <td>=</td>
                     <td>7</td>
                 </tr>
+                <tr>
+                    <td>10</td>
+                    <td>*</td>
+                    <td>10</td>
+                    <td>=</td>
+                    <td>100</td>
+                </tr>
             </tbody>
         </table>
     </div>
     <script>
-        // Vainilla Javascript
-        // const formulario = document.getElementById('formulario');
-        // formulario.addEventListener('submit', function (event) {
-        //     event.preventDefault();
-        //     const a = parseInt(document.getElementById('A').value);
-        //     const b = parseInt(document.getElementById('B').value);
-        //     const resultado = document.getElementById('resultado');
-        //     resultado.innerHTML = `La sumatoria de los números ${a} y ${b} es igual a: <b>${a + b}</b>`;
-        // });
+        // Vainilla Javascript, sin ningún patrón particular
+
+        // https://developer.mozilla.org/es/docs/Web/API/Document/getElementById
+        const formulario = document.getElementById('formulario');
+        // https://developer.mozilla.org/es/docs/Web/API/EventTarget/addEventListener
+        formulario.addEventListener('submit', function (event) {
+            // https://developer.mozilla.org/es/docs/Web/API/Event/preventDefault
+            event.preventDefault();
+            // https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/parseInt
+            const a = parseInt(document.getElementById('A').value);
+            const b = parseInt(document.getElementById('B').value);
+            const resultado = document.getElementById('resultado');
+            // https://developer.mozilla.org/es/docs/Web/API/Element/innerHTML
+            resultado.innerHTML = `La sumatoria de los números ${a} y ${b} es igual a: <b>${a + b}</b>`;
+        });
 
         // Estructura basada en módulo
-        (() => {
-            const App = {
-                htmlElements: {
-                    formulario: document.getElementById('formulario'),
-                    a: document.getElementById('A'),
-                    b: document.getElementById('B'),
-                    resultado: document.getElementById('resultado'),
-                },
-                init: () => {
-                    App.bindEvents();
-                },
-                bindEvents: () => {
-                    App.htmlElements.formulario.addEventListener('submit', App.Methods.onSubmitFormulario);
-                },
-                Methods: {
-                    onSubmitFormulario: (event) => {
-                        event.preventDefault();
-                        const a = parseInt(App.htmlElements.a.value);
-                        const b = parseInt(App.htmlElements.b.value);
-                        App.htmlElements.resultado.innerHTML = `La sumatoria de los números ${a} y ${b} es igual a: <b>${a + b}</b>`;
-                    }
-                }
-            };
-            App.init();
-        })();
+        // Más información sobre patrones de diseño en Javascript: https://addyosmani.com/resources/essentialjsdesignpatterns/book/index.html#modulepatternjavascript
+        // (function () {
+        //     const App = {
+        //         htmlElements: {
+        //             formulario: document.getElementById('formulario'),
+        //             a: document.getElementById('A'),
+        //             b: document.getElementById('B'),
+        //             resultado: document.getElementById('resultado'),
+        //         },
+        //         init: () => {
+        //             App.bindEvents();
+        //         },
+        //         bindEvents: () => {
+        //             App.htmlElements.formulario.addEventListener('submit', App.Methods.onSubmitFormulario);
+        //         },
+        //         Methods: {
+        //             onSubmitFormulario: (event) => {
+        //                 event.preventDefault();
+        //                 const a = parseInt(App.htmlElements.a.value);
+        //                 const b = parseInt(App.htmlElements.b.value);
+        //                 App.htmlElements.resultado.innerHTML = `La sumatoria de los números ${a} y ${b} es igual a: <b>${a + b}</b>`;
+        //             }
+        //         }
+        //     };
+        //     App.init();
+        // })();
     </script>
 </body>
 

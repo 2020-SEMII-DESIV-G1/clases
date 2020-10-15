@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3. images links</title>
+</head>
+
+<body>
+    <h1>3. Images / Links </h1>
+    <h2>3.1 Images</h2>
+    <!-- https://developer.mozilla.org/es/docs/Web/HTML/Elemento/img -->
+    <img width="100" src="image_1.jpeg" alt="Esto es un ejemplo de una imagen">
+    <img width="100" src="img/image_2.jpeg" alt="Esto es un ejemplo de una imagen">
+    <img width="100" src="../image_3.jpeg" alt="Esto es un ejemplo de una imagen">
+    <h2>3.2 Links</h2>
+    <a target="_blank" href="https://www.google.com">Esto es un hypervinculo</a>
+    <br>
+    <a target="_blank" href="image_1.jpeg">
+        <img width="100" src="image_1.jpeg" alt="">
+    </a>
+    <br>
+    <script>
+        function calcula(a, b, fn) {
+            fn(a, b);
+        }
+        calcula(10, 20, (a, b) => { console.log(a + b) });
+        calcula(10, 20, (a, b) => { console.log(a - b) });
+        calcula(10, 20, (a, b) => { console.log(a * b) });
+        calcula(10, 20, (a, b) => { console.log(a / b) });
+    </script>
+</body>
+
+</html>

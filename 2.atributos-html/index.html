@@ -39,6 +39,7 @@
     </div>
     <div>
         <!-- TABLA DE RESULTADO -->
+        <span id="resultado"></span>
         <table>
             <thead>
                 <th>A</th>
@@ -81,19 +82,27 @@
     </div>
     <script>
         // Vainilla Javascript, sin ningún patrón particular
+        // 1 < N1 < 10
+        // 1 < N2 < 10
 
         // https://developer.mozilla.org/es/docs/Web/API/Document/getElementById
         const formulario = document.getElementById('formulario');
         // https://developer.mozilla.org/es/docs/Web/API/EventTarget/addEventListener
         formulario.addEventListener('submit', function (event) {
-            // https://developer.mozilla.org/es/docs/Web/API/Event/preventDefault
-            event.preventDefault();
-            // https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/parseInt
-            const a = parseInt(document.getElementById('A').value);
-            const b = parseInt(document.getElementById('B').value);
-            const resultado = document.getElementById('resultado');
-            // https://developer.mozilla.org/es/docs/Web/API/Element/innerHTML
-            resultado.innerHTML = `La sumatoria de los números ${a} y ${b} es igual a: <b>${a + b}</b>`;
+            try {
+                // https://developer.mozilla.org/es/docs/Web/API/Event/preventDefault
+                event.preventDefault();
+                // https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/parseInt
+                const a = parseInt(document.getElementById('A').value);
+                const b = parseInt(document.getElementById('B').value);
+                if (a < 1 || a > 10) { throw new Error('El valor A se encuentra fuera de rango') }
+                if (b < 1 || b > 10) { throw new Error('El valor B se encuentra fuera de rango') }
+                const resultado = document.getElementById('resultado');
+                // https://developer.mozilla.org/es/docs/Web/API/Element/innerHTML
+                resultado.innerHTML = `La sumatoria de los números ${a} y ${b} es igual a: <b>${a + b}</b>`;
+            } catch (error) {
+                alert(error);
+            }
         });
 
         // Estructura basada en módulo

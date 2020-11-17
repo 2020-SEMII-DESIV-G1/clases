@@ -8,7 +8,66 @@
 </head>
 
 <body>
+    <h1>Empleados</h1>
+    <table>
+        <thead>
+            <th>Nombre</th>
+            <th>Salario</th>
+            <th>Edad</th>
+        </thead>
+        <tbody id="table-response">
+        </tbody>
+    </table>
+    <script>
+        (() => {
+            const App = {
+                config: {
+                    baseUrl: 'http://dummy.restapiexample.com',
+                    getEmployeesUrl: () => `${App.config.baseUrl}/api/v1/employees`,
+                    getEmployeeUrl: (id) => `${App.config.baseUrl}/api/v1/employees/${id}`,
+                },
+                htmlElements: {
+                    tableResponse: document.querySelector("#table-response"),
+                },
+                init: () => {
+                    App.drawEmployees();
+                },
+                drawEmployees: async () => {
+                    // Retrieve data from server
+                    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment
+                    const { data, status } = await App.Requests.getEmployees();
 
+                    // Draw the table with retrieved data.
+                    data.forEach(function ({ employee_name, employee_salary, employee_age }) {
+                        const htmlTemplate = `<tr><td><a href="#">${employee_name}</a></td><td>${employee_salary}</td><td>${employee_age}</td></tr>`;
+                        App.htmlElements.tableResponse.innerHTML += htmlTemplate;
+                    });
+                },
+                Requests: {
+                    /*
+                        Retrieve employees from server
+                    **/
+                    getEmployees: async () => {
+                        // https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API
+                        // https://caniuse.com/?search=fetch
+                        return App.Utils.fetch(App.config.getEmployeesUrl());
+                    },
+                    getEmployee: async () => {
+                        // https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API
+                        // https://caniuse.com/?search=fetch
+                        return App.Utils.fetch(App.config.getEmployeeUrl());
+                    }
+                },
+                Utils: {
+                    fetch: async (url) => {
+                        const response = await fetch(url);
+                        return response.json();
+                    }
+                }
+            };
+            App.init();
+        })();
+    </script>
 </body>
 
 </html>
